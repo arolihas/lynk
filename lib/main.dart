@@ -13,7 +13,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue
       ),
-      home: Profile(),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Lynk'),
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.person)),
+                Tab(icon: Icon(Icons.developer_board)),
+              ]
+            )
+          ),
+          body: TabBarView(
+            children: [
+              Profile(),
+              QRCode()
+            ]
+          )
+        ),
+      ),
     );
   }
 }
