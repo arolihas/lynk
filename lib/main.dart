@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'link.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +25,7 @@ class Profile extends StatefulWidget {
 
 class ProfileState extends State<Profile> {
   final _links = <Link>[];
-  final _name = Text('name');
+  //final _name = Text('name');
     
   @override
   Widget build(BuildContext context) {
@@ -90,4 +91,31 @@ class ProfileState extends State<Profile> {
     );
   }
 
+}
+
+class QRCode extends StatefulWidget {
+  @override 
+  QRCodeState createState() => QRCodeState();
+}
+
+class QRCodeState extends State<QRCode> {
+  final _qr = new QrImage(
+    data: "https://gmail.com",
+    size: 200,
+  );
+  @override 
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Your QR Code'),
+      ),
+      body: _buildQR(),
+    );
+  }
+
+  Widget _buildQR() {
+    return Center(
+      child: _qr
+    );
+  }
 }
