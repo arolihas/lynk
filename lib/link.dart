@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'socialIcons.dart';
 
+const iconDict = <String, IconData>{
+  'Facebook': SocialIcons.facebook_rect,
+  'Twitter': SocialIcons.twitter_bird,
+  'Instagram': SocialIcons.instagram_filled,
+  'Github': SocialIcons.github,
+  'Email': SocialIcons.gmail,
+  'LinkedIn': SocialIcons.linkedin_rect
+};
 
 class Link {
-  final String source;
+  String source;
   String description;
-  Icon icon;
+  IconData icon;
 
-  Link(this.source, this.description, this.icon) {
+  Link(this.source, this.description) {
     if (source == null || source.isEmpty) {
       throw ArgumentError("Need source");
+    } else {
+      source = this.source;
     }
     if (description == null || description.isEmpty) {
       description = source;
-    }
-    if (icon == null) {
-      icon = new Icon(MdiIcons.linkVariant);
+      icon = MdiIcons.linkVariant;
+    } else {
+      description = this.description;
+      icon = iconDict[description];
     }
   }
 
