@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'socialIcons.dart';
+import 'package:lynk_mobile/socialIcons.dart';
 
 const iconDict = <String, IconData>{
   'Facebook': SocialIcons.facebook_rect,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'link.dart';
-import 'qr.dart';
-import 'socialIcons.dart';
+import 'package:lynk_mobile/link.dart';
+import 'package:lynk_mobile/qr.dart';
 
 void main() => runApp(MyApp());
 
