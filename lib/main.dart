@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:lynk_mobile/link.dart';
 import 'package:lynk_mobile/qr.dart';
+import 'package:lynk_mobile/auth.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Login());
+
+class Login extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Lynk',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Lynk'),
+          backgroundColor: Colors.lightBlue,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              LoginButton(),
+              UserProfile()
+            ]
+          )
+        )
+      )
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -52,7 +76,6 @@ class Profile extends StatefulWidget {
 
 class ProfileState extends State<Profile> {
   final _links = <Link>[];
-  //final _name = Text('name');
     
   @override
   Widget build(BuildContext context) {
@@ -162,6 +185,58 @@ class ProfileState extends State<Profile> {
             )
           );
         })
+    );
+  }
+}
+
+class UserProfile extends StatefulWidget {
+  @override 
+  UserProfileState createState() => UserProfileState();
+}
+
+class UserProfileState extends State<UserProfile> {
+  Map<String, dynamic> _profile;
+  var _loading = false;
+
+  @override
+  initState() {
+    super.initState();
+
+    authService.profile.listen((state) => setState(() => _profile = state));
+    authService.loading.listen((state) => setState(() => _loading = state));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: <Widget>[
+      Container(padding: EdgeInsets.all(20), child: Text(_profile.toString())),
+      Text(_loading.toString())
+    ]);
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: authService.user,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return MaterialButton(
+            onPressed: () => authService.signOut(),
+            color: Colors.lightBlue,
+            textColor: Colors.white,
+            child: Text('Signout'),
+          );
+        } else {
+          return MaterialButton(
+            onPressed: () => authService.googleSignIn(),
+            color: Colors.lightBlue,
+            textColor: Colors.white,
+            child: Text('Login with Google'),
+          );
+        }
+      } 
     );
   }
 }
