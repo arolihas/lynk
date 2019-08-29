@@ -12,23 +12,41 @@ const iconDict = <String, IconData>{
 };
 
 class Link {
+  int linkID;
   String source;
   String description;
   IconData icon;
 
-  Link(this.source, this.description) {
+  Link({this.linkID, this.source, this.description, this.icon});
+
+  Link.construct(source, description) {
+    
     if (source == null || source.isEmpty) {
       throw ArgumentError("Need source");
     } else {
-      source = this.source;
+      this.source = source;
     }
+    
     if (description == null || description.isEmpty) {
-      description = source;
-      icon = MdiIcons.linkVariant;
+      this.description = source;
+      this.icon = MdiIcons.linkVariant;
     } else {
-      description = this.description;
-      icon = iconDict[description];
+      this.description = description;
+      this.icon = iconDict[description];
     }
+
   }
+
+  factory Link.fromJson(Map<String, dynamic> json) => new Link(
+    linkID: json["linkID"],
+    source: json["source"],
+    description: json["description"]
+  );
+
+  Map<String, dynamic> toJson() => {
+    "linkID": linkID,
+    "source": source,
+    "description": description
+  };  
 
 }

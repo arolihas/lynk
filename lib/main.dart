@@ -42,11 +42,7 @@ class LoginButton extends StatelessWidget {
         } else {
           return MaterialButton(
             onPressed: () {
-              authService.googleSignIn();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MainProfile()),
-              );
+              signIn(context);
             },
             color: Colors.lightBlue,
             textColor: Colors.white,
@@ -56,6 +52,15 @@ class LoginButton extends StatelessWidget {
       }
     );
   }
+
+  void signIn(BuildContext context) {
+    authService.googleSignIn();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MainProfile()),
+    );
+  }
+
 }
 
 

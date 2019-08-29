@@ -23,6 +23,7 @@ class AuthService {
           .snapshots()
           .map((snap) => snap.data);
       } else {
+        print('fuck this');
         return Observable.just({});
       }
     });

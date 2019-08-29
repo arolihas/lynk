@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lynk_mobile/link.dart';
+import 'package:lynk_mobile/models/link_model.dart';
 import 'package:lynk_mobile/qr.dart';
 import 'package:lynk_mobile/auth.dart';
 
@@ -145,7 +145,7 @@ class ProfileState extends State<Profile> {
                       labelText: 'Social Media URL'
                     ),
                     onSaved: (String value) {
-                      Link newLink = Link(value,_dropdownValue);
+                      Link newLink = Link.construct(value,_dropdownValue);
                       _links.add(newLink);
                     },
                     validator: (String value) {
